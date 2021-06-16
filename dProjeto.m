@@ -86,7 +86,14 @@ while true
     
     if (sqrt(sum(sum((V_new-V_old).^2)))/sqrt(sum(sum(V_new.^2)))) < tol %Condição de tolerância
         [X,Y] = meshgrid(-L:h:L);
+        
+        figure;
         mesh(X,Y,V_new);
+        
+        title('Potencial na superfície');
+        xlabel('Eixo y');
+        ylabel('Eixo x');
+        zlabel('Diferença de potencial');
         break
     end
     

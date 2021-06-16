@@ -7,8 +7,10 @@ clc;
 L=1; %Width
 tol=1e-7; %Tolerance
 
-h = [0.05 0.1 0.2 0.5]; %Diferent steps
-%........................................
+h = [0.02 0.025 0.03125 0.04 0.05 0.0625 0.1 0.125 0.2 0.25 0.5]; %Diferent steps
+%..................................................................................
+
+[M,n_Iter,time] = deal(zeros(1,length(h)));
 
 for hIndex = 1:length(h)
 
@@ -86,10 +88,34 @@ for hIndex = 1:length(h)
     time(hIndex) = toc;
 end
 
-plot(log(n_Iter),log(M));
-figure;
-plot(log(time),log(M));
+x = log(M);
+yi = log(n_Iter);
+yt = log(time);
 
-%AJUSTE POLINOMIAL!!!
-%PLOTS
-%STEPS!!!
+pn = polyfit(x,yi,1);
+pt = polyfit(x,yt,1);
+
+figure;
+subplot(2,2,1);
+plot(x,yi,'-o');
+title('Dados do número de iterações');
+xlabel('Logarítmo de M');
+ylabel('Logarítmo de nIte');
+
+subplot(2,2,2);
+plot(x,polyval(pn,x));
+title(strcat('Polyfit do número de iterações (m=',num2str(pn(1)),')'));
+xlabel('Logarítmo de M');
+ylabel('Logarítmo de nIte');
+
+subplot(2,2,3);
+plot(x,yt,'-o');
+title('Dados do tempo de iteração');
+xlabel('Logarítmo de M');
+ylabel('Logarítmo do tempo');
+
+subplot(2,2,4);
+plot(x,polyval(pt,x));
+title(strcat('Polyfit do tempo de iteração (m=',num2str(pt(1)),')'));
+xlabel('Logarítmo de M');
+ylabel('Logarítmo do tempo');

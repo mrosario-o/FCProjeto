@@ -76,7 +76,14 @@ while true
     
     if (sqrt(sum(sum((V_new-V_old).^2)))/sqrt(sum(sum(V_new.^2)))) < tol %Condição de tolerância
         [X,Y] = meshgrid(-L:h:L);
+        
+        figure;
         mesh(X,Y,V_new);
+        
+        title('Potencial na superfície');
+        xlabel('Eixo y');
+        ylabel('Eixo x');
+        zlabel('Diferença de potencial');
         break
     end
     
@@ -86,9 +93,14 @@ end
 [Ex,Ey]=gradient(V_new,h,h);
 Ex=-Ex; Ey=-Ey; %Dado que os vectores têm o sentido oposto
 
-figure(2);
-quiver(X,Y,Ex,Ey);
+figure;
+quiver(X,Y,Ex,Ey,'Color','r');
 grid on;
+axis equal;
+
+title('Campo elétrico');
+xlabel('Eixo y');
+ylabel('Eixo x');
 
 E = norm([Ex(1,1),Ey(1,1)]); %O campo é uniforme podemos utilizar qualquer vetor;
 
