@@ -1,7 +1,7 @@
 clear;
 clc;
 
-%Análise do campo elétrico C)
+%AnÃ¡lise do campo elÃ©trico C)
 
 %Properties:
 L=1; %Width
@@ -66,24 +66,24 @@ V_new=V_old;
 
 nIte = 0;
 while true
-    nIte = nIte + 1; %Incremento de número de iterações
+    nIte = nIte + 1; %Incremento de nÃºmero de iteraÃ§Ãµes
     
-    for xIndex = 2:N-1 %Fronteiras não alteradas
+    for xIndex = 2:N-1 %Fronteiras nÃ£o alteradas
         for yIndex = 2:N-1
             V_new(xIndex,yIndex)=(1-alphaOpt)*V_old(xIndex,yIndex)+alphaOpt*(V_new(xIndex,yIndex+1)+V_new(xIndex,yIndex-1)+V_new(xIndex+1,yIndex)+V_new(xIndex-1,yIndex))/4;
         end
     end
     
-    if (sqrt(sum(sum((V_new-V_old).^2)))/sqrt(sum(sum(V_new.^2)))) < tol %Condição de tolerância
+    if (sqrt(sum(sum((V_new-V_old).^2)))/sqrt(sum(sum(V_new.^2)))) < tol %CondiÃ§Ã£o de tolerÃ¢ncia
         [X,Y] = meshgrid(-L:h:L);
         
         figure;
         mesh(X,Y,V_new);
         
-        title('Potencial na superfície');
+        title('Potencial na superfÃ­cie');
         xlabel('Eixo y');
         ylabel('Eixo x');
-        zlabel('Diferença de potencial');
+        zlabel('DiferenÃ§a de potencial');
         break
     end
     
@@ -91,17 +91,17 @@ while true
 end
 
 [Ex,Ey]=gradient(V_new,h,h);
-Ex=-Ex; Ey=-Ey; %Dado que os vectores têm o sentido oposto
+Ex=-Ex; Ey=-Ey; %Dado que os vectores tÃªm o sentido oposto
 
 figure;
 quiver(X,Y,Ex,Ey,'Color','r');
 grid on;
 axis equal;
 
-title('Campo elétrico');
+title('Campo elÃ©trico');
 xlabel('Eixo y');
 ylabel('Eixo x');
 
-E = norm([Ex(1,1),Ey(1,1)]); %O campo é uniforme podemos utilizar qualquer vetor;
+E = norm([Ex(1,1),Ey(1,1)]); %O campo Ã© uniforme podemos utilizar qualquer vetor;
 
-fprintf('Módulo do campo elétrico: %d.\n',E);
+fprintf('MÃ³dulo do campo elÃ©trico: %d.\n',E);
