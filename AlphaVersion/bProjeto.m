@@ -1,7 +1,7 @@
 clear;
 clc;
 
-%Análise do método de Jacobi B1) e B2)
+%AnÃ¡lise do mÃ©todo de Jacobi B1) e B2)
 
 %Properties:
 L=1; %Width
@@ -69,15 +69,15 @@ for hIndex = 1:length(h)
     nIte = 0;
     tic;
     while true
-        nIte = nIte + 1; %Incremento de número de iterações
+        nIte = nIte + 1; %Incremento de nÃºmero de iteraÃ§Ãµes
 
-        for xIndex = 2:N-1 %Fronteiras não alteradas
+        for xIndex = 2:N-1 %Fronteiras nÃ£o alteradas
             for yIndex = 2:N-1
                 V_new(xIndex,yIndex)=(V_old(xIndex,yIndex+1)+V_old(xIndex,yIndex-1)+V_old(xIndex+1,yIndex)+V_old(xIndex-1,yIndex))/4;
             end
         end
 
-        if (sqrt(sum(sum((V_new-V_old).^2)))/sqrt(sum(sum(V_new.^2)))) < tol %Condição de tolerância
+        if (sqrt(sum(sum((V_new-V_old).^2)))/sqrt(sum(sum(V_new.^2)))) < tol %CondiÃ§Ã£o de tolerÃ¢ncia
             n_Iter(hIndex) = nIte;
             break
         end
@@ -98,24 +98,24 @@ pt = polyfit(x,yt,1);
 figure;
 subplot(2,2,1);
 plot(x,yi,'-o');
-title('Dados do número de iterações');
-xlabel('Logarítmo de M');
-ylabel('Logarítmo de nIte');
+title('Dados do nÃºmero de iteraÃ§Ãµes');
+xlabel('LogarÃ­tmo de M');
+ylabel('LogarÃ­tmo de nIte');
 
 subplot(2,2,2);
 plot(x,polyval(pn,x));
-title(strcat('Polyfit do número de iterações (m=',num2str(pn(1)),')'));
-xlabel('Logarítmo de M');
-ylabel('Logarítmo de nIte');
+title(strcat('Polyfit do nÃºmero de iteraÃ§Ãµes (m=',num2str(pn(1)),')'));
+xlabel('LogarÃ­tmo de M');
+ylabel('LogarÃ­tmo de nIte');
 
 subplot(2,2,3);
 plot(x,yt,'-o');
-title('Dados do tempo de iteração');
-xlabel('Logarítmo de M');
-ylabel('Logarítmo do tempo');
+title('Dados do tempo de iteraÃ§Ã£o');
+xlabel('LogarÃ­tmo de M');
+ylabel('LogarÃ­tmo do tempo');
 
 subplot(2,2,4);
 plot(x,polyval(pt,x));
-title(strcat('Polyfit do tempo de iteração (m=',num2str(pt(1)),')'));
-xlabel('Logarítmo de M');
-ylabel('Logarítmo do tempo');
+title(strcat('Polyfit do tempo de iteraÃ§Ã£o (m=',num2str(pt(1)),')'));
+xlabel('LogarÃ­tmo de M');
+ylabel('LogarÃ­tmo do tempo');
